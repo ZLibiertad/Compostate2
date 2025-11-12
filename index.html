@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CompostAR - Introducción</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      color: #fff;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    p {
+      max-width: 400px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    button {
+      background-color: #fff;
+      color: #56ab2f;
+      font-size: 1rem;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #e3f2e1;
+    }
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenido a CompostAR 🌱</h1>
+  <p>
+    Esta aplicación utiliza la cámara de tu dispositivo para mostrar objetos de realidad aumentada relacionados con el compostaje.
+    <br><br>
+    Al continuar, permitirás el acceso a tu cámara únicamente para fines educativos dentro de la experiencia CompostAR.
+  </p>
+  <button onclick="entrar()">Continuar</button>
+
+  <footer>CompostAR - Proyecto educativo 2025</footer>
+
+  <script>
+    function entrar() {
+      window.location.href = "ra.html"; // Cambiá este nombre si tu archivo RA tiene otro nombre
+    }
+  </script>
+</body>
+</html>
