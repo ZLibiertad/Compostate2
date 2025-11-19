@@ -4,63 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CompostAR - Introducción</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #a8e063, #56ab2f);
-      color: #fff;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    p {
-      max-width: 400px;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    button {
-      background-color: #fff;
-      color: #56ab2f;
-      font-size: 1rem;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background-color: #e3f2e1;
-    }
-    footer {
-      position: absolute;
-      bottom: 15px;
-      font-size: 0.8rem;
-      opacity: 0.8;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Bienvenido a CompostAR 🌱</h1>
-  <p>
-    Esta aplicación utiliza la cámara de tu dispositivo para mostrar objetos de realidad aumentada relacionados con el compostaje.
-    <br><br>
-    Al continuar, permitirás el acceso a tu cámara únicamente para fines educativos dentro de la experiencia CompostAR.
-  </p>
-  <button onclick="entrar()">Continuar</button>
+  <div class="container">
+    <header>
+      <h1>Bienvenido a CompostAR 🌱</h1>
+      <p class="subtitle">Aprende sobre compostaje con Realidad Aumentada</p>
+    </header>
 
-  <footer>CompostAR - Proyecto educativo 2025</footer>
+    <section class="intro">
+      <h2>¿Qué es el Compostaje?</h2>
+      <p>
+        El compostaje es un proceso natural que transforma los residuos orgánicos en un 
+        abono rico en nutrientes para las plantas. Es una forma efectiva de reducir hasta 
+        el <strong>50% de los residuos domésticos</strong> que generamos diariamente.
+      </p>
+    </section>
+
+    <section class="importance">
+      <h2>¿Por qué es importante?</h2>
+      <div class="benefits">
+        <div class="benefit-card">
+          <span class="emoji">🌍</span>
+          <h3>Reduce residuos</h3>
+          <p>Menos basura en rellenos sanitarios</p>
+        </div>
+        <div class="benefit-card">
+          <span class="emoji">💚</span>
+          <h3>Enriquece el suelo</h3>
+          <p>Mejora la calidad de la tierra</p>
+        </div>
+        <div class="benefit-card">
+          <span class="emoji">♻️</span>
+          <h3>Economía circular</h3>
+          <p>Cierra el ciclo de nutrientes</p>
+        </div>
+        <div class="benefit-card">
+          <span class="emoji">🌡️</span>
+          <h3>Combate el cambio climático</h3>
+          <p>Reduce emisiones de metano</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ar-info">
+      <h2>Experiencia de Realidad Aumentada</h2>
+      <p>
+        Esta aplicación utiliza la cámara de tu dispositivo para mostrar objetos 3D 
+        relacionados con el compostaje. Al continuar, permitirás el acceso a tu cámara 
+        únicamente para fines educativos dentro de la experiencia CompostAR.
+      </p>
+      <button class="btn-primary" onclick="entrar()">Comenzar Experiencia AR</button>
+    </section>
+
+    <section class="markers">
+      <h2>Marcadores AR</h2>
+      <p>Descarga e imprime estos marcadores para usar con la aplicación:</p>
+      <div class="marker-grid">
+        <div class="marker-item">
+          <img src="assets/marcadorBanana.jpg" alt="Marcador Banana" class="marker-image">
+          <p>Marcador Banana</p>
+          <a href="assets/marcadorBanana.jpg" download class="btn-download">Descargar</a>
+        </div>
+        <div class="marker-item">
+          <img src="assets/marcadorBotella.jpg" alt="Marcador Botella" class="marker-image">
+          <p>Marcador Botella</p>
+          <a href="assets/marcadorBotella.jpg" download class="btn-download">Descargar</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="qr-section">
+      <h2>Escanea desde tu móvil</h2>
+      <p>Usa este código QR para acceder directamente a la experiencia AR:</p>
+      <div class="qr-container">
+        <img src="assets/marcadorCompostAr.webp" alt="QR Code CompostAR" class="qr-image">
+      </div>
+      <p class="qr-note">Escanea el código con la cámara de tu teléfono</p>
+    </section>
+
+    <footer>
+      <p>CompostAR - Proyecto educativo 2025</p>
+      <p class="footer-note">Desarrollado para concientizar sobre el cuidado ambiental</p>
+    </footer>
+  </div>
 
   <script>
     function entrar() {
-      window.location.href = "ra.html"; // Cambiá este nombre si tu archivo RA tiene otro nombre
+      window.location.href = "ra.html";
     }
   </script>
 </body>
