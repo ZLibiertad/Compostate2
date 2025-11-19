@@ -4,6 +4,110 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      .info-panel {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        max-width: 85%;
+        width: 350px;
+        display: none;
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        z-index: 1000;
+        animation: slideUp 0.4s ease-out;
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateX(-50%) translateY(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(-50%) translateY(0);
+          opacity: 1;
+        }
+      }
+      .info-panel.show {
+        display: block;
+      }
+      .info-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .compostable {
+        color: #56ab2f;
+      }
+      .not-compostable {
+        color: #e74c3c;
+      }
+      .recyclable {
+        color: #3498db;
+      }
+      .info-content {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #2d3436;
+      }
+      .info-item {
+        margin: 8px 0;
+        padding-left: 8px;
+      }
+      .info-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin: 8px 4px 8px 0;
+      }
+      .badge-compostable {
+        background-color: #d4edda;
+        color: #155724;
+      }
+      .badge-not-compostable {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+      .badge-recyclable {
+        background-color: #d1ecf1;
+        color: #0c5460;
+      }
+      .nutrients {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .nutrient-tag {
+        background: linear-gradient(135deg, #a8e063, #56ab2f);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+      .decomposition-time {
+        background-color: #fff3cd;
+        color: #856404;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-weight: 500;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <a-scene 
@@ -14,7 +118,6 @@
       vr-mode-ui="enabled: false" 
       device-orientation-permission-ui="enabled: false">
      
-      
       <a-assets>
         <a-asset-item id="bananaModel" src="./assets/bananaConPiel2.glb"></a-asset-item>
         <a-asset-item id="botellaModel" src="./assets/botellaTres.glb"></a-asset-item>
@@ -22,7 +125,8 @@
       
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       
-      <a-entity mindar-image-target="targetIndex: 0">
+      <!-- Marcador Banana (targetIndex: 0) -->
+      <a-entity mindar-image-target="targetIndex: 0" id="banana-target">
         <a-gltf-model 
           rotation="0 0 0" 
           position="0 -0.25 0" 
@@ -32,7 +136,8 @@
         </a-gltf-model>
       </a-entity>
       
-      <a-entity mindar-image-target="targetIndex: 1">
+      <!-- Marcador Botella (targetIndex: 1) -->
+      <a-entity mindar-image-target="targetIndex: 1" id="botella-target">
         <a-gltf-model 
           rotation="0 0 90" 
           position="0.5 0.5 0.5" 
@@ -44,5 +149,94 @@
       </a-entity>
       
     </a-scene>
+
+    <!-- Panel de información para Banana -->
+    <div id="banana-info" class="info-panel">
+      <div class="info-title compostable">
+        🍌 Cáscara de Banana
+      </div>
+      <div class="info-content">
+        <span class="info-badge badge-compostable">✅ COMPOSTABLE</span>
+        
+        <div class="decomposition-time">
+          ⏱️ Tiempo de descomposición: 2-5 semanas
+        </div>
+        
+        <div class="info-item">
+          <strong>Aporta al suelo:</strong>
+        </div>
+        <div class="nutrients">
+          <span class="nutrient-tag">🌿 Nitrógeno (N)</span>
+          <span class="nutrient-tag">🌱 Potasio (K)</span>
+          <span class="nutrient-tag">🍃 Fósforo (P)</span>
+          <span class="nutrient-tag">💧 Magnesio (Mg)</span>
+          <span class="nutrient-tag">⚡ Calcio (Ca)</span>
+        </div>
+        
+        <div class="info-item" style="margin-top: 12px; font-size: 0.9rem; font-style: italic;">
+          💚 La banana es rica en potasio, ideal para fortalecer las plantas
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel de información para Botella -->
+    <div id="botella-info" class="info-panel">
+      <div class="info-title not-compostable">
+        🍾 Botella Plástica
+      </div>
+      <div class="info-content">
+        <span class="info-badge badge-not-compostable">❌ NO COMPOSTABLE</span>
+        <span class="info-badge badge-recyclable">♻️ RECICLABLE</span>
+        
+        <div class="info-item" style="margin-top: 15px;">
+          <strong>⚠️ Importante:</strong>
+        </div>
+        <div class="info-item">
+          • No se descompone naturalmente
+        </div>
+        <div class="info-item">
+          • Tarda más de 450 años en degradarse
+        </div>
+        <div class="info-item">
+          • Puede reciclarse y convertirse en nuevos productos
+        </div>
+        
+        <div class="info-item" style="margin-top: 12px; font-size: 0.9rem; font-style: italic; color: #3498db;">
+          ♻️ Recordá: lavá y separala para el contenedor de reciclables
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Referencias a los paneles de información
+      const bananaInfo = document.getElementById('banana-info');
+      const botellaInfo = document.getElementById('botella-info');
+      
+      // Referencias a los targets
+      const bananaTarget = document.getElementById('banana-target');
+      const botellaTarget = document.getElementById('botella-target');
+      
+      // Detectar cuando se encuentra el marcador de banana
+      bananaTarget.addEventListener('targetFound', () => {
+        bananaInfo.classList.add('show');
+        botellaInfo.classList.remove('show');
+      });
+      
+      // Detectar cuando se pierde el marcador de banana
+      bananaTarget.addEventListener('targetLost', () => {
+        bananaInfo.classList.remove('show');
+      });
+      
+      // Detectar cuando se encuentra el marcador de botella
+      botellaTarget.addEventListener('targetFound', () => {
+        botellaInfo.classList.add('show');
+        bananaInfo.classList.remove('show');
+      });
+      
+      // Detectar cuando se pierde el marcador de botella
+      botellaTarget.addEventListener('targetLost', () => {
+        botellaInfo.classList.remove('show');
+      });
+    </script>
   </body>
 </html>
